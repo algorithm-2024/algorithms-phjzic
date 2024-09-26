@@ -1,5 +1,6 @@
 package io.mobile.sorting;
 
+import io.mobile.sorting.advanced.HeapSort;
 import io.mobile.sorting.advanced.MergeSort;
 import io.mobile.sorting.advanced.QuickSort;
 import io.mobile.sorting.basic.BubbleSort;
@@ -10,13 +11,14 @@ import io.mobile.sorting.common.SortList;
 import java.util.Random;
 
 public class PerformanceTest { // 성능 측정
-    public static final int SIZE = 10_000;
+    public static final int SIZE = 50_000;
     public static void main(String[] args) {
         Integer[] selectionList = new Integer[SIZE];
         Integer[] bubbleList = new Integer[SIZE];
         Integer[] insertionList = new Integer[SIZE];
         Integer[] mergeList = new Integer[SIZE];
         Integer[] quickList = new Integer[SIZE];
+        Integer[] heapList = new Integer[SIZE];
         Random random = new Random();
         for (int i = 0; i <  SIZE; i++) {
             int value = random.nextInt(100_000);
@@ -25,6 +27,7 @@ public class PerformanceTest { // 성능 측정
             insertionList[i] = value;
             mergeList[i] = value;
             quickList[i] = value;
+            heapList[i] = value;
         }
 
         SortList<Integer> selectionSort = new SelectionSort<>(selectionList);
@@ -51,11 +54,17 @@ public class PerformanceTest { // 성능 측정
         endTime = System.nanoTime();
         System.out.println("병합정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
 
-        SortList<Integer> quickSort = new QuickSort<>(mergeList);
+        SortList<Integer> quickSort = new QuickSort<>(quickList);
         startTime = System.nanoTime();
         quickSort.sort();
         endTime = System.nanoTime();
         System.out.println("퀵정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
+
+        SortList<Integer> heapSort = new HeapSort<>(heapList);
+        startTime = System.nanoTime();
+        heapSort.sort();
+        endTime = System.nanoTime();
+        System.out.println("힙정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
         // sort.print();
     }
 }
