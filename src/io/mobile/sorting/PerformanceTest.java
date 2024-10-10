@@ -8,6 +8,7 @@ import io.mobile.sorting.basic.BubbleSort;
 import io.mobile.sorting.basic.InsertionSort;
 import io.mobile.sorting.basic.SelectionSort;
 import io.mobile.sorting.common.SortList;
+import io.mobile.sorting.special.CountingSort;
 import io.mobile.sorting.special.RadixSort;
 
 import java.util.Random;
@@ -23,9 +24,10 @@ public class PerformanceTest { // 성능 측정
         Integer[] heapList = new Integer[SIZE];
         Integer[] shellList = new Integer[SIZE];
         Integer[] radixList = new Integer[SIZE];
+        Integer[] countingList = new Integer[SIZE];
         Random random = new Random();
         for (int i = 0; i <  SIZE; i++) {
-            int value = random.nextInt(10_000);
+            int value = random.nextInt(10_000_000);
             selectionList[i] = value;
             bubbleList[i] = value;
             insertionList[i] = value;
@@ -34,6 +36,7 @@ public class PerformanceTest { // 성능 측정
             heapList[i] = value;
             shellList[i] = value;
             radixList[i] = value;
+            countingList[i] = value;
         }
 
         SortList<Integer> selectionSort = new SelectionSort<>(selectionList);
@@ -83,6 +86,12 @@ public class PerformanceTest { // 성능 측정
         radixSort.sort();
         endTime = System.nanoTime();
         System.out.println("기수정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
+
+        SortList<Integer> countingSort = new CountingSort(countingList);
+        startTime = System.nanoTime();
+        countingSort.sort();
+        endTime = System.nanoTime();
+        System.out.println("계수정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
         // sort.print();
     }
 }
