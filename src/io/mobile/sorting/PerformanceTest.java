@@ -3,6 +3,7 @@ package io.mobile.sorting;
 import io.mobile.sorting.advanced.HeapSort;
 import io.mobile.sorting.advanced.MergeSort;
 import io.mobile.sorting.advanced.QuickSort;
+import io.mobile.sorting.advanced.ShellSort;
 import io.mobile.sorting.basic.BubbleSort;
 import io.mobile.sorting.basic.InsertionSort;
 import io.mobile.sorting.basic.SelectionSort;
@@ -19,6 +20,7 @@ public class PerformanceTest { // 성능 측정
         Integer[] mergeList = new Integer[SIZE];
         Integer[] quickList = new Integer[SIZE];
         Integer[] heapList = new Integer[SIZE];
+        Integer[] shellList = new Integer[SIZE];
         Random random = new Random();
         for (int i = 0; i <  SIZE; i++) {
             int value = random.nextInt(100_000);
@@ -28,6 +30,7 @@ public class PerformanceTest { // 성능 측정
             mergeList[i] = value;
             quickList[i] = value;
             heapList[i] = value;
+            shellList[i] = value;
         }
 
         SortList<Integer> selectionSort = new SelectionSort<>(selectionList);
@@ -36,11 +39,11 @@ public class PerformanceTest { // 성능 측정
         long endTime = System.nanoTime();
         System.out.println("선택정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
 
-        SortList<Integer> bubbleSort = new BubbleSort<>(bubbleList);
-        startTime = System.nanoTime();
-        bubbleSort.sort();
-        endTime = System.nanoTime();
-        System.out.println("버블정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
+//        SortList<Integer> bubbleSort = new BubbleSort<>(bubbleList);
+//        startTime = System.nanoTime();
+//        bubbleSort.sort();
+//        endTime = System.nanoTime();
+//        System.out.println("버블정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
 
         SortList<Integer> insertionSort = new InsertionSort<>(insertionList);
         startTime = System.nanoTime();
@@ -65,6 +68,12 @@ public class PerformanceTest { // 성능 측정
         heapSort.sort();
         endTime = System.nanoTime();
         System.out.println("힙정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
+
+        SortList<Integer> shellSort = new ShellSort<>(shellList);
+        startTime = System.nanoTime();
+        shellSort.sort();
+        endTime = System.nanoTime();
+        System.out.println("셸정렬 시간: " + ((endTime - startTime) / 1000_000.0) + " ms");
         // sort.print();
     }
 }
