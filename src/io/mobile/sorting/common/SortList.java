@@ -21,4 +21,16 @@ public abstract class SortList<E extends Comparable<E>> {
         list[i] = list[j];
         list[j] = tmp;
     }
+
+    // list[0...last] 중 가장 큰 수 list[k]를 찾는다.
+    protected int getLargest(int last) {
+        int largest = 0;
+
+        for (int i = 1; i <= last; i++) {
+            if (list[i].compareTo(list[largest]) > 0) {
+                largest = i;
+            }
+        }
+        return largest;
+    }
 }
